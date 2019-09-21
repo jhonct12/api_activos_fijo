@@ -24,4 +24,31 @@ public class EstadoActualService {
         }
         return q.getResultList();
     }
+
+
+    public EstadoActual getEstadoActualByCodigo(String codigo){
+        return entityManager.find(EstadoActual.class, codigo);
+    }
+
+    public EstadoActual createEstadoActual(EstadoActual estadoActual){
+        entityManager.persist(estadoActual);
+        return estadoActual;
+    }
+
+    public EstadoActual updateEstadoActual(String code, EstadoActual estadoActual){
+        EstadoActual estadoActualToUpdate = entityManager.find(EstadoActual.class, code);
+
+        if (estadoActual.getDescripcion() != null){
+            estadoActualToUpdate.setDescripcion(estadoActual.getDescripcion());
+        }
+
+        return entityManager.merge(estadoActual);
+
+    }
+
+    public EstadoActual deleteEstadoActual(String codigo){
+        EstadoActual estadoActual = entityManager.find(EstadoActual.class, codigo);
+        entityManager.remove(estadoActual);
+        return estadoActual;
+    }
 }

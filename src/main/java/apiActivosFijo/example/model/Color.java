@@ -12,15 +12,15 @@ public class Color {
     public static final String FIND_ALL = "Color.findAll";
 
     @Id
-    private String code;
+    private String codigo;
     private String descripcion;
 
-    public String getCode() {
-        return code;
+    public String getCodigo() {
+        return codigo;
     }
 
-    public void setCode(String code) {
-        this.code = code;
+    public void setCodigo(String code) {
+        this.codigo = code;
     }
 
     public String getDescripcion() {

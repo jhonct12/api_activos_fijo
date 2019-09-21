@@ -12,27 +12,26 @@ public class Areas {
     public static final String FIND_ALL = "Areas.findAll";
 
     @Id
-    private String codigoArea;
+    private String codigo;
 
-    private String nombreArea;
+    private String nombre;
     private String ciudad;
     private String descripcion;
-    private String tipoArea;
 
-    public String getCodigoArea() {
-        return codigoArea;
+    public String getCodigo() {
+        return codigo;
     }
 
-    public void setCodigoArea(String codigoArea) {
-        this.codigoArea = codigoArea;
+    public void setCodigo(String codigoArea) {
+        this.codigo = codigoArea;
     }
 
-    public String getNombreArea() {
-        return nombreArea;
+    public String getNombre() {
+        return nombre;
     }
 
-    public void setNombreArea(String nombreArea) {
-        this.nombreArea = nombreArea;
+    public void setNombre(String nombreArea) {
+        this.nombre = nombreArea;
     }
 
     public String getCiudad() {
@@ -51,11 +50,4 @@ public class Areas {
         this.descripcion = descripcion;
     }
 
-    public String getTipoArea() {
-        return tipoArea;
-    }
-
-    public void setTipoArea(String tipoArea) {
-        this.tipoArea = tipoArea;
-    }
 }

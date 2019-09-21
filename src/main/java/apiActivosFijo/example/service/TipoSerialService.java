@@ -23,4 +23,28 @@ public class TipoSerialService {
         }
         return q.getResultList();
     }
+
+    public TipoSerial getTipoSerialByCode(String code){
+        return entityManager.find(TipoSerial.class, code);
+    }
+
+    public TipoSerial createTipoSerial(TipoSerial tipoSerial){
+        entityManager.persist(tipoSerial);
+        return tipoSerial;
+    }
+
+    public TipoSerial updateTipoSerial(String code, TipoSerial tipoSerial){
+        TipoSerial tipoSerialToUpdate = entityManager.find(TipoSerial.class, code);
+        if (tipoSerial.getTipoSerial() != null){
+            tipoSerialToUpdate.setTipoSerial(tipoSerial.getTipoSerial());
+        }
+
+        return entityManager.merge(tipoSerialToUpdate);
+    }
+
+    public TipoSerial deleteTipoSerial(String code){
+        TipoSerial tipoSerial = entityManager.find(TipoSerial.class, code);
+        entityManager.remove(tipoSerial);
+        return tipoSerial;
+    }
 }

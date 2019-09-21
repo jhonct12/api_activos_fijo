@@ -25,8 +25,8 @@ public class ColorService {
         return q.getResultList();
     }
 
-    public Color getColorByCode(String code){
-        return entityManager.find(Color.class, code);
+    public Color getColorByCodigo(String codigo){
+        return entityManager.find(Color.class, codigo);
     }
 
     public Color createColor(Color color){
@@ -45,8 +45,8 @@ public class ColorService {
 
     }
 
-    public Color deleteColor(String code){
-        Color color = entityManager.find(Color.class, code);
+    public Color deleteColor(String codigo){
+        Color color = entityManager.find(Color.class, codigo);
         entityManager.remove(color);
         return color;
     }

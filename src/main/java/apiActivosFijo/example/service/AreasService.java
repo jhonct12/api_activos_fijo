@@ -1,6 +1,7 @@
 package apiActivosFijo.example.service;
 
 import apiActivosFijo.example.model.Areas;
+import apiActivosFijo.example.model.Color;
 
 import javax.ejb.Stateless;
 import javax.persistence.*;
@@ -24,4 +25,31 @@ public class AreasService {
         }
         return q.getResultList();
     }
+
+    public Areas getAreasByCodigo(String codigo){
+        return entityManager.find(Areas.class, codigo);
+    }
+
+    public Areas createAreas(Areas areas){
+        entityManager.persist(areas);
+        return areas;
+    }
+
+    public Areas updateAreas(String code, Areas areas){
+        Areas areasToUpdate = entityManager.find(Areas.class, code);
+
+        if (areas.getDescripcion() != null){
+            areasToUpdate.setDescripcion(areas.getDescripcion());
+        }
+
+        return entityManager.merge(areasToUpdate);
+
+    }
+
+    public Areas deleteAreas(String codigo){
+        Areas areas = entityManager.find(Areas.class, codigo);
+        entityManager.remove(areas);
+        return areas;
+    }
+
 }
