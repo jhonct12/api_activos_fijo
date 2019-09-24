@@ -38,13 +38,13 @@ public class ColorResource {
 
     @GET
     @Path("/byCodigo")
-    public Response getColorByCodigo(@QueryParam(CODIGO) String codigo){
-        if (codigo.equals("")){
+    public Response getColorByCodigo(@QueryParam(CODIGO) String codigo) {
+        if (codigo.equals("")) {
             return responses.getResponse(Response.Status.BAD_REQUEST, KEY_COLOR, new String[]{CODIGO, DESCRIPCION}, new String[]{"", "El codigo ingresado no puede estar vacio"});
         }
         Color color = colorService.getColorByCodigo(codigo);
 
-        if (color == null){
+        if (color == null) {
             return responses.getResponse(Response.Status.NOT_FOUND, KEY_COLOR, new String[]{CODIGO, DESCRIPCION}, new String[]{codigo, "No existe ningun registro con el codigo ingresado"});
         }
 
@@ -52,27 +52,27 @@ public class ColorResource {
     }
 
     @POST
-    public Response createColor(Color color){
-        if (color.getCodigo().equals("")){
+    public Response createColor(Color color) {
+        if (color.getCodigo().equals("")) {
             return responses.getResponse(Response.Status.BAD_REQUEST, KEY_COLOR, new String[]{CODIGO, DESCRIPCION}, new String[]{"", "El codigo ingresado no puede estar vacio"});
         }
 
         Color buscarColor = colorService.getColorByCodigo(color.getCodigo());
 
-        if (buscarColor != null){
-            return responses.getResponse(Response.Status.FORBIDDEN, KEY_COLOR+"_Existe", new String[]{CODIGO, DESCRIPCION}, new String[]{color.getCodigo(), "El codigo del objeto que desea crear ya se encuentra registrado"});
+        if (buscarColor != null) {
+            return responses.getResponse(Response.Status.FORBIDDEN, KEY_COLOR + "_Existe", new String[]{CODIGO, DESCRIPCION}, new String[]{color.getCodigo(), "El codigo del objeto que desea crear ya se encuentra registrado"});
         }
         Color createColor = colorService.createColor(color);
         return Response.status(Response.Status.CREATED).entity(createColor).build();
     }
 
     @PUT
-    public Response updateColor(Color color){
-        if (color.getCodigo().equals("")){
+    public Response updateColor(Color color) {
+        if (color.getCodigo().equals("")) {
             return responses.getResponse(Response.Status.BAD_REQUEST, KEY_COLOR, new String[]{CODIGO, DESCRIPCION}, new String[]{"", "El codigo ingresado no puede estar vacio"});
         }
 
-        if (colorService.getColorByCodigo(color.getCodigo()) == null){
+        if (colorService.getColorByCodigo(color.getCodigo()) == null) {
             return responses.getResponse(Response.Status.NOT_FOUND, KEY_COLOR, new String[]{CODIGO, DESCRIPCION}, new String[]{color.getCodigo(), "No existe ningun registro con el codigo ingresado"});
         }
 
@@ -81,11 +81,11 @@ public class ColorResource {
     }
 
     @DELETE
-    public Response deleteColor(@QueryParam(CODIGO) String codigo){
-        if (codigo.equals("")){
+    public Response deleteColor(@QueryParam(CODIGO) String codigo) {
+        if (codigo.equals("")) {
             return responses.getResponse(Response.Status.BAD_REQUEST, KEY_COLOR, new String[]{CODIGO, DESCRIPCION}, new String[]{"", "El codigo ingresado no puede estar vacio"});
         }
-        if (colorService.getColorByCodigo(codigo) == null){
+        if (colorService.getColorByCodigo(codigo) == null) {
             return responses.getResponse(Response.Status.NOT_FOUND, KEY_COLOR, new String[]{CODIGO, DESCRIPCION}, new String[]{codigo, "No existe ningun registro con el codigo ingresado"});
         }
         Color color = colorService.deleteColor(codigo);

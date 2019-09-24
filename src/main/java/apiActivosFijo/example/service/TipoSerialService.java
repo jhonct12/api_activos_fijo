@@ -1,6 +1,6 @@
 package apiActivosFijo.example.service;
 
-import apiActivosFijo.example.model.TipoSerial;
+import apiActivosFijo.example.model.Tipo;
 
 import javax.ejb.Stateless;
 import javax.persistence.*;
@@ -12,8 +12,8 @@ public class TipoSerialService {
     @PersistenceContext
     EntityManager entityManager;
 
-    public List<TipoSerial> getAllTipoSerial(Integer firstResult, Integer maxResult){
-        Query q = entityManager.createNamedQuery(TipoSerial.FIND_ALL);
+    public List<Tipo> getAllTipoSerial(Integer firstResult, Integer maxResult) {
+        Query q = entityManager.createNamedQuery(Tipo.FIND_ALL);
         if (firstResult != null) {
             q.setFirstResult(firstResult - 1);
         }
@@ -24,26 +24,26 @@ public class TipoSerialService {
         return q.getResultList();
     }
 
-    public TipoSerial getTipoSerialByCode(String code){
-        return entityManager.find(TipoSerial.class, code);
+    public Tipo getTipoSerialByCode(String code) {
+        return entityManager.find(Tipo.class, code);
     }
 
-    public TipoSerial createTipoSerial(TipoSerial tipoSerial){
+    public Tipo createTipoSerial(Tipo tipoSerial) {
         entityManager.persist(tipoSerial);
         return tipoSerial;
     }
 
-    public TipoSerial updateTipoSerial(String code, TipoSerial tipoSerial){
-        TipoSerial tipoSerialToUpdate = entityManager.find(TipoSerial.class, code);
-        if (tipoSerial.getTipoSerial() != null){
-            tipoSerialToUpdate.setTipoSerial(tipoSerial.getTipoSerial());
+    public Tipo updateTipoSerial(String code, Tipo tipoSerial) {
+        Tipo tipoSerialToUpdate = entityManager.find(Tipo.class, code);
+        if (tipoSerial.getDescripcion() != null) {
+            tipoSerialToUpdate.setDescripcion(tipoSerial.getDescripcion());
         }
 
         return entityManager.merge(tipoSerialToUpdate);
     }
 
-    public TipoSerial deleteTipoSerial(String code){
-        TipoSerial tipoSerial = entityManager.find(TipoSerial.class, code);
+    public Tipo deleteTipoSerial(String code) {
+        Tipo tipoSerial = entityManager.find(Tipo.class, code);
         entityManager.remove(tipoSerial);
         return tipoSerial;
     }

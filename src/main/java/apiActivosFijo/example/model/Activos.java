@@ -6,10 +6,16 @@ import javax.persistence.*;
 @Entity
 @Table(name = "activos")
 @NamedQueries({
-        @NamedQuery(name = Activos.FIND_ALL, query = "SELECT a FROM Activos a")
+        @NamedQuery(name = Activos.FIND_ALL, query = "SELECT a FROM Activos a"),
+        @NamedQuery(name = Activos.FIND_TIPO, query = "SELECT a FROM Activos a where a.tipo = :tipo"),
+        @NamedQuery(name = Activos.FIND_FECHA_COMPRA, query = "SELECT a FROM Activos a where a.fechaCompra = :fechaCompra"),
+        @NamedQuery(name = Activos.FIND_SERIAL, query = "SELECT a FROM Activos a where a.serial = :serial")
 })
 public class Activos {
     public static final String FIND_ALL = "Activos.findAll";
+    public static final String FIND_TIPO = "Activos.findTipo";
+    public static final String FIND_FECHA_COMPRA = "Activos.findFechaCompra";
+    public static final String FIND_SERIAL = "Activos.findSerial";
 
     @Id
     private String codigo;
@@ -17,12 +23,13 @@ public class Activos {
     private String descripcion;
 
     @ManyToOne(optional = false, fetch = FetchType.EAGER)
-    private TipoSerial tipoSerial;
+    private Tipo tipo;
 
     private String numeroInternoInventario;
     private Double peso;
     private Double alto;
     private Double largo;
+    private String serial;
     private Number valorCompra;
     private Long fechaCompra;
     private Long fechaBaja;
@@ -57,12 +64,12 @@ public class Activos {
         this.descripcion = descripcion;
     }
 
-    public TipoSerial getTipoSerial() {
-        return tipoSerial;
+    public Tipo getTipo() {
+        return tipo;
     }
 
-    public void setTipoSerial(TipoSerial tipoSerial) {
-        this.tipoSerial = tipoSerial;
+    public void setTipo(Tipo tipo) {
+        this.tipo = tipo;
     }
 
     public String getNumeroInternoInventario() {
@@ -95,6 +102,14 @@ public class Activos {
 
     public void setLargo(Double largo) {
         this.largo = largo;
+    }
+
+    public String getSerial() {
+        return serial;
+    }
+
+    public void setSerial(String serial) {
+        this.serial = serial;
     }
 
     public Number getValorCompra() {

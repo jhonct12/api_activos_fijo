@@ -3,7 +3,6 @@ package apiActivosFijo.example.resource;
 import apiActivosFijo.example.model.Areas;
 import apiActivosFijo.example.model.Color;
 import apiActivosFijo.example.service.AreasService;
-import apiActivosFijo.example.service.ColorService;
 
 import javax.ejb.EJB;
 import javax.ws.rs.*;
@@ -12,6 +11,10 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
 import java.util.List;
+
+import static apiActivosFijo.example.Diccionario.Diccionario.CODIGO;
+import static apiActivosFijo.example.Diccionario.Diccionario.DESCRIPCION;
+import static apiActivosFijo.example.Diccionario.Diccionario.KEY_AREA;
 
 @Consumes(MediaType.APPLICATION_JSON)
 @Produces(MediaType.APPLICATION_JSON)
@@ -38,4 +41,62 @@ public class AreasResource {
         List<Areas> areasList = areasService.getAllAreas(firstResult, maxResult);
         return Response.ok(areasList).build();
     }
+
+    @GET
+    @Path("/byCodigo")
+    public Response getAreaByCodigo(@QueryParam(CODIGO) String codigo) {
+        if (codigo.equals("")) {
+            return responses.getResponse(Response.Status.BAD_REQUEST, KEY_AREA, new String[]{CODIGO, DESCRIPCION}, new String[]{"", "El codigo ingresado no puede estar vacio"});
+        }
+
+        Areas areas = areasService.getAreasByCodigo(codigo);
+
+        if (areas == null) {
+            return responses.getResponse(Response.Status.NOT_FOUND, KEY_AREA, new String[]{CODIGO, DESCRIPCION}, new String[]{codigo, "No existe ningun registro con el codigo ingresado"});
+        }
+
+        return Response.ok(areas).build();
+    }
+
+    @POST
+    public Response createAreas(Areas areas) {
+        if (areas.getCodigo().equals("")) {
+            return responses.getResponse(Response.Status.BAD_REQUEST, KEY_AREA, new String[]{CODIGO, DESCRIPCION}, new String[]{"", "El codigo ingresado no puede estar vacio"});
+        }
+
+        Areas buscarAreas = areasService.getAreasByCodigo(areas.getCodigo());
+
+        if (buscarAreas != null) {
+            return responses.getResponse(Response.Status.FORBIDDEN, KEY_AREA + "_Existe", new String[]{CODIGO, DESCRIPCION}, new String[]{areas.getCodigo(), "El codigo del objeto que desea crear ya se encuentra registrado"});
+        }
+        Areas createAreas = areasService.createAreas(areas);
+        return Response.status(Response.Status.CREATED).entity(createAreas).build();
+    }
+
+    @PUT
+    public Response updateAreas(Areas areas) {
+        if (areas.getCodigo().equals("")) {
+            return responses.getResponse(Response.Status.BAD_REQUEST, KEY_AREA, new String[]{CODIGO, DESCRIPCION}, new String[]{"", "El codigo ingresado no puede estar vacio"});
+        }
+
+        if (areasService.getAreasByCodigo(areas.getCodigo()) == null) {
+            return responses.getResponse(Response.Status.NOT_FOUND, KEY_AREA, new String[]{CODIGO, DESCRIPCION}, new String[]{areas.getCodigo(), "No existe ningun registro con el codigo ingresado"});
+        }
+
+        Areas areasToUpdate = areasService.updateAreas(areas.getCodigo(), areas);
+        return Response.ok(areasToUpdate).build();
+    }
+
+    @DELETE
+    public Response deleteAreas(@QueryParam(CODIGO) String codigo) {
+        if (codigo.equals("")) {
+            return responses.getResponse(Response.Status.BAD_REQUEST, KEY_AREA, new String[]{CODIGO, DESCRIPCION}, new String[]{"", "El codigo ingresado no puede estar vacio"});
+        }
+        if (areasService.getAreasByCodigo(codigo) == null) {
+            return responses.getResponse(Response.Status.NOT_FOUND, KEY_AREA, new String[]{CODIGO, DESCRIPCION}, new String[]{codigo, "No existe ningun registro con el codigo ingresado"});
+        }
+        Areas areas = areasService.deleteAreas(codigo);
+        return Response.ok(areas).build();
+    }
+
 }

@@ -3,19 +3,19 @@ package apiActivosFijo.example.model;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "asociacionAreas")
+@Table(name = "asociacionPersonas")
 @NamedQueries({
-        @NamedQuery(name = AsociacionAreas.FIND_ALL, query = "SELECT a FROM AsociacionAreas a")
+        @NamedQuery(name = AsociacionPersonas.FIND_ALL, query = "SELECT a FROM AsociacionPersonas a")
 })
-public class AsociacionAreas {
-    public static final String FIND_ALL = "AsociacionAreas.findAll";
+public class AsociacionPersonas {
+    public static final String FIND_ALL = "AsociacionPersonas.findAll";
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long codigo;
 
     @ManyToOne(optional = false, fetch = FetchType.EAGER)
-    private Areas areas;
+    private Personas personas;
 
     @ManyToOne(optional = false, fetch = FetchType.EAGER)
     private Activos activos;
@@ -32,12 +32,12 @@ public class AsociacionAreas {
         this.codigo = codigo;
     }
 
-    public Areas getAreas() {
-        return areas;
+    public Personas getPersonas() {
+        return personas;
     }
 
-    public void setAreas(Areas areas) {
-        this.areas = areas;
+    public void setPersonas(Personas personas) {
+        this.personas = personas;
     }
 
     public Activos getActivos() {

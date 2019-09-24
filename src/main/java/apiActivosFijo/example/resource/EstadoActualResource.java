@@ -43,13 +43,13 @@ public class EstadoActualResource {
 
     @GET
     @Path("/byCodigo")
-    public Response getEstadoActualByCodigo(@QueryParam(CODIGO) String codigo){
-        if (codigo.equals("")){
+    public Response getEstadoActualByCodigo(@QueryParam(CODIGO) String codigo) {
+        if (codigo.equals("")) {
             return responses.getResponse(Response.Status.BAD_REQUEST, KEY_ESTADO_ACTUAL, new String[]{CODIGO, DESCRIPCION}, new String[]{"", "El codigo ingresado no puede estar vacio"});
         }
         EstadoActual estadoActual = estadoActualService.getEstadoActualByCodigo(codigo);
 
-        if (estadoActual == null){
+        if (estadoActual == null) {
             return responses.getResponse(Response.Status.NOT_FOUND, KEY_ESTADO_ACTUAL, new String[]{CODIGO, DESCRIPCION}, new String[]{codigo, "No existe ningun registro con el codigo ingresado"});
         }
 
@@ -57,15 +57,15 @@ public class EstadoActualResource {
     }
 
     @POST
-    public Response createEstadoActual(EstadoActual estadoActual){
-        if (estadoActual.getCodigo().equals("")){
+    public Response createEstadoActual(EstadoActual estadoActual) {
+        if (estadoActual.getCodigo().equals("")) {
             return responses.getResponse(Response.Status.BAD_REQUEST, KEY_ESTADO_ACTUAL, new String[]{CODIGO, DESCRIPCION}, new String[]{"", "El codigo ingresado no puede estar vacio"});
         }
 
         EstadoActual buscarEstadoActual = estadoActualService.getEstadoActualByCodigo(estadoActual.getCodigo());
 
-        if (buscarEstadoActual != null){
-            return responses.getResponse(Response.Status.FORBIDDEN, KEY_ESTADO_ACTUAL+"_Existe", new String[]{CODIGO, DESCRIPCION}, new String[]{estadoActual.getCodigo(), "El codigo del objeto que desea crear ya se encuentra registrado"});
+        if (buscarEstadoActual != null) {
+            return responses.getResponse(Response.Status.FORBIDDEN, KEY_ESTADO_ACTUAL + "_Existe", new String[]{CODIGO, DESCRIPCION}, new String[]{estadoActual.getCodigo(), "El codigo del objeto que desea crear ya se encuentra registrado"});
         }
         EstadoActual createEstadoActual = estadoActualService.createEstadoActual(estadoActual);
         return Response.status(Response.Status.CREATED).entity(createEstadoActual).build();
@@ -73,12 +73,12 @@ public class EstadoActualResource {
 
 
     @PUT
-    public Response updateColor(EstadoActual estadoActual){
-        if (estadoActual.getCodigo().equals("")){
+    public Response updateColor(EstadoActual estadoActual) {
+        if (estadoActual.getCodigo().equals("")) {
             return responses.getResponse(Response.Status.BAD_REQUEST, KEY_ESTADO_ACTUAL, new String[]{CODIGO, DESCRIPCION}, new String[]{"", "El codigo ingresado no puede estar vacio"});
         }
 
-        if (estadoActualService.getEstadoActualByCodigo(estadoActual.getCodigo()) == null){
+        if (estadoActualService.getEstadoActualByCodigo(estadoActual.getCodigo()) == null) {
             return responses.getResponse(Response.Status.NOT_FOUND, KEY_ESTADO_ACTUAL, new String[]{CODIGO, DESCRIPCION}, new String[]{estadoActual.getCodigo(), "No existe ningun registro con el codigo ingresado"});
         }
 
@@ -87,14 +87,14 @@ public class EstadoActualResource {
     }
 
     @DELETE
-    public Response deleteEstadoActual(@QueryParam(CODIGO) String codigo){
-        if (codigo.equals("")){
+    public Response deleteEstadoActual(@QueryParam(CODIGO) String codigo) {
+        if (codigo.equals("")) {
             return responses.getResponse(Response.Status.BAD_REQUEST, KEY_ESTADO_ACTUAL, new String[]{CODIGO, DESCRIPCION}, new String[]{"", "El codigo ingresado no puede estar vacio"});
         }
-        if (estadoActualService.getEstadoActualByCodigo(codigo) == null){
+        if (estadoActualService.getEstadoActualByCodigo(codigo) == null) {
             return responses.getResponse(Response.Status.NOT_FOUND, KEY_ESTADO_ACTUAL, new String[]{CODIGO, DESCRIPCION}, new String[]{codigo, "No existe ningun registro con el codigo ingresado"});
         }
-        EstadoActual estadoActual= estadoActualService.deleteEstadoActual(codigo);
+        EstadoActual estadoActual = estadoActualService.deleteEstadoActual(codigo);
         return Response.ok(estadoActual).build();
     }
 }

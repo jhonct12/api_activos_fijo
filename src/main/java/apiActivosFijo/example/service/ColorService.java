@@ -13,7 +13,7 @@ public class ColorService {
     @PersistenceContext
     EntityManager entityManager;
 
-    public List<Color> getAllColor(Integer firstResult, Integer maxResult){
+    public List<Color> getAllColor(Integer firstResult, Integer maxResult) {
         Query q = entityManager.createNamedQuery(Color.FIND_ALL);
         if (firstResult != null) {
             q.setFirstResult(firstResult - 1);
@@ -25,19 +25,19 @@ public class ColorService {
         return q.getResultList();
     }
 
-    public Color getColorByCodigo(String codigo){
+    public Color getColorByCodigo(String codigo) {
         return entityManager.find(Color.class, codigo);
     }
 
-    public Color createColor(Color color){
+    public Color createColor(Color color) {
         entityManager.persist(color);
         return color;
     }
 
-    public Color updateColor(String code, Color color){
+    public Color updateColor(String code, Color color) {
         Color colorToUpdate = entityManager.find(Color.class, code);
 
-        if (color.getDescripcion() != null){
+        if (color.getDescripcion() != null) {
             colorToUpdate.setDescripcion(color.getDescripcion());
         }
 
@@ -45,7 +45,7 @@ public class ColorService {
 
     }
 
-    public Color deleteColor(String codigo){
+    public Color deleteColor(String codigo) {
         Color color = entityManager.find(Color.class, codigo);
         entityManager.remove(color);
         return color;

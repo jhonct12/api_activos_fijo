@@ -13,7 +13,7 @@ public class EstadoActualService {
     @PersistenceContext
     EntityManager entityManager;
 
-    public List<EstadoActual> getAllEstadoActual(Integer firstResult, Integer maxResult){
+    public List<EstadoActual> getAllEstadoActual(Integer firstResult, Integer maxResult) {
         Query q = entityManager.createNamedQuery(EstadoActual.FIND_ALL);
         if (firstResult != null) {
             q.setFirstResult(firstResult - 1);
@@ -26,19 +26,19 @@ public class EstadoActualService {
     }
 
 
-    public EstadoActual getEstadoActualByCodigo(String codigo){
+    public EstadoActual getEstadoActualByCodigo(String codigo) {
         return entityManager.find(EstadoActual.class, codigo);
     }
 
-    public EstadoActual createEstadoActual(EstadoActual estadoActual){
+    public EstadoActual createEstadoActual(EstadoActual estadoActual) {
         entityManager.persist(estadoActual);
         return estadoActual;
     }
 
-    public EstadoActual updateEstadoActual(String code, EstadoActual estadoActual){
+    public EstadoActual updateEstadoActual(String code, EstadoActual estadoActual) {
         EstadoActual estadoActualToUpdate = entityManager.find(EstadoActual.class, code);
 
-        if (estadoActual.getDescripcion() != null){
+        if (estadoActual.getDescripcion() != null) {
             estadoActualToUpdate.setDescripcion(estadoActual.getDescripcion());
         }
 
@@ -46,7 +46,7 @@ public class EstadoActualService {
 
     }
 
-    public EstadoActual deleteEstadoActual(String codigo){
+    public EstadoActual deleteEstadoActual(String codigo) {
         EstadoActual estadoActual = entityManager.find(EstadoActual.class, codigo);
         entityManager.remove(estadoActual);
         return estadoActual;
