@@ -15,11 +15,17 @@ import java.util.List;
 
 import static apiActivosFijo.example.Diccionario.Diccionario.*;
 
+/**
+ * The type Asociacion personas resource.
+ */
 @Consumes(MediaType.APPLICATION_JSON)
 @Produces(MediaType.APPLICATION_JSON)
 @Path("/asociacionPersonas")
 public class AsociacionPersonasResource {
 
+    /**
+     * The Uri info.
+     */
     @Context
     UriInfo uriInfo;
 
@@ -28,6 +34,13 @@ public class AsociacionPersonasResource {
 
     private Responses responses = new Responses();
 
+    /**
+     * Gets all asociacion personas.
+     *
+     * @param firstResult the first result
+     * @param maxResult   the max result
+     * @return the all asociacion personas
+     */
     @GET
     public Response getAllAsociacionPersonas(@QueryParam(FIRST_RESULT) Integer firstResult, @QueryParam(MAX_RESULT) Integer maxResult) {
         if (firstResult != null && firstResult < 1) {
@@ -41,6 +54,12 @@ public class AsociacionPersonasResource {
     }
 
 
+    /**
+     * Gets asociacion areas by codigo.
+     *
+     * @param codigo the codigo
+     * @return the asociacion areas by codigo
+     */
     @GET
     @Path("/byCodigo")
     public Response getAsociacionAreasByCodigo(@QueryParam(CODIGO) Long codigo) {
@@ -56,6 +75,12 @@ public class AsociacionPersonasResource {
         return Response.ok(asociacionPersonas).build();
     }
 
+    /**
+     * Create asociacion personas response.
+     *
+     * @param asociacionPersonas the asociacion personas
+     * @return the response
+     */
     @POST
     public Response createAsociacionPersonas(AsociacionPersonas asociacionPersonas) {
         if (asociacionPersonas.getCodigo() == null) {
@@ -76,6 +101,12 @@ public class AsociacionPersonasResource {
         return Response.status(Response.Status.CREATED).entity(createAsociacionPersonas).build();
     }
 
+    /**
+     * Update asociacion personas response.
+     *
+     * @param asociacionPersonas the asociacion personas
+     * @return the response
+     */
     @PUT
     public Response updateAsociacionPersonas(AsociacionPersonas asociacionPersonas) {
         if (asociacionPersonas.getCodigo() == null) {
@@ -94,6 +125,12 @@ public class AsociacionPersonasResource {
         return Response.ok(asociacionPersonasToUpdate).build();
     }
 
+    /**
+     * Delete asociacion personas response.
+     *
+     * @param codigo the codigo
+     * @return the response
+     */
     @DELETE
     public Response deleteAsociacionPersonas(@QueryParam(CODIGO) Long codigo) {
         if (codigo == null) {

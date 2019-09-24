@@ -9,12 +9,25 @@ import javax.persistence.Query;
 import java.util.List;
 
 
+/**
+ * The type Asociacion areas service.
+ */
 @Stateless
 public class AsociacionAreasService {
 
+    /**
+     * The Entity manager.
+     */
     @PersistenceContext
     EntityManager entityManager;
 
+    /**
+     * Gets all asociacion areas.
+     *
+     * @param firstResult the first result
+     * @param maxResult   the max result
+     * @return the all asociacion areas
+     */
     public List<AsociacionAreas> getAllAsociacionAreas(Integer firstResult, Integer maxResult) {
         Query q = entityManager.createNamedQuery(AsociacionAreas.FIND_ALL);
         if (firstResult != null) {
@@ -27,15 +40,34 @@ public class AsociacionAreasService {
         return q.getResultList();
     }
 
+    /**
+     * Gets asociacion areas by codigo.
+     *
+     * @param codigo the codigo
+     * @return the asociacion areas by codigo
+     */
     public AsociacionAreas getAsociacionAreasByCodigo(Long codigo) {
         return entityManager.find(AsociacionAreas.class, codigo);
     }
 
+    /**
+     * Create asociacion areas asociacion areas.
+     *
+     * @param asociacionAreas the asociacion areas
+     * @return the asociacion areas
+     */
     public AsociacionAreas createAsociacionAreas(AsociacionAreas asociacionAreas) {
         entityManager.persist(asociacionAreas);
         return asociacionAreas;
     }
 
+    /**
+     * Update asociacion areas asociacion areas.
+     *
+     * @param codigo          the codigo
+     * @param asociacionAreas the asociacion areas
+     * @return the asociacion areas
+     */
     public AsociacionAreas updateAsociacionAreas(Long codigo, AsociacionAreas asociacionAreas) {
         AsociacionAreas asociacionAreasToUpdate = entityManager.find(AsociacionAreas.class, codigo);
 
@@ -61,6 +93,12 @@ public class AsociacionAreasService {
         return entityManager.merge(asociacionAreasToUpdate);
     }
 
+    /**
+     * Delet asociacion areas asociacion areas.
+     *
+     * @param codigo the codigo
+     * @return the asociacion areas
+     */
     public AsociacionAreas deletAsociacionAreas(Long codigo) {
         AsociacionAreas asociacionAreas = entityManager.find(AsociacionAreas.class, codigo);
         entityManager.remove(asociacionAreas);

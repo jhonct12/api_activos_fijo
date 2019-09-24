@@ -15,11 +15,17 @@ import static apiActivosFijo.example.Diccionario.Diccionario.CODIGO;
 import static apiActivosFijo.example.Diccionario.Diccionario.DESCRIPCION;
 import static apiActivosFijo.example.Diccionario.Diccionario.KEY_ESTADO_ACTUAL;
 
+/**
+ * The type Estado actual resource.
+ */
 @Consumes(MediaType.APPLICATION_JSON)
 @Produces(MediaType.APPLICATION_JSON)
 @Path("/estadoActual")
 public class EstadoActualResource {
 
+    /**
+     * The Uri info.
+     */
     @Context
     UriInfo uriInfo;
 
@@ -29,6 +35,13 @@ public class EstadoActualResource {
     private Responses responses = new Responses();
 
 
+    /**
+     * Gets all estado actual.
+     *
+     * @param firstResult the first result
+     * @param maxResult   the max result
+     * @return the all estado actual
+     */
     @GET
     public Response getAllEstadoActual(@QueryParam("firstResult") Integer firstResult, @QueryParam("maxResult") Integer maxResult) {
         if (firstResult != null && firstResult < 1) {
@@ -41,6 +54,12 @@ public class EstadoActualResource {
         return Response.ok(estadoActuals).build();
     }
 
+    /**
+     * Gets estado actual by codigo.
+     *
+     * @param codigo the codigo
+     * @return the estado actual by codigo
+     */
     @GET
     @Path("/byCodigo")
     public Response getEstadoActualByCodigo(@QueryParam(CODIGO) String codigo) {
@@ -56,6 +75,12 @@ public class EstadoActualResource {
         return Response.ok(estadoActual).build();
     }
 
+    /**
+     * Create estado actual response.
+     *
+     * @param estadoActual the estado actual
+     * @return the response
+     */
     @POST
     public Response createEstadoActual(EstadoActual estadoActual) {
         if (estadoActual.getCodigo().equals("")) {
@@ -72,6 +97,12 @@ public class EstadoActualResource {
     }
 
 
+    /**
+     * Update color response.
+     *
+     * @param estadoActual the estado actual
+     * @return the response
+     */
     @PUT
     public Response updateColor(EstadoActual estadoActual) {
         if (estadoActual.getCodigo().equals("")) {
@@ -86,6 +117,12 @@ public class EstadoActualResource {
         return Response.ok(estadoActualToUpdate).build();
     }
 
+    /**
+     * Delete estado actual response.
+     *
+     * @param codigo the codigo
+     * @return the response
+     */
     @DELETE
     public Response deleteEstadoActual(@QueryParam(CODIGO) String codigo) {
         if (codigo.equals("")) {

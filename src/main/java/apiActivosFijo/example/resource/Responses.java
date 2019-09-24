@@ -7,6 +7,9 @@ import javax.ws.rs.core.Response;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * The type Responses.
+ */
 public class Responses {
     /**
      * Custom response depending on the given status and description

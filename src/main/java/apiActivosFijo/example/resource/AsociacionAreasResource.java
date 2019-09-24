@@ -13,11 +13,17 @@ import java.util.List;
 
 import static apiActivosFijo.example.Diccionario.Diccionario.*;
 
+/**
+ * The type Asociacion areas resource.
+ */
 @Consumes(MediaType.APPLICATION_JSON)
 @Produces(MediaType.APPLICATION_JSON)
 @Path("/asociacionAreas")
 public class AsociacionAreasResource {
 
+    /**
+     * The Uri info.
+     */
     @Context
     UriInfo uriInfo;
 
@@ -27,6 +33,13 @@ public class AsociacionAreasResource {
     private Responses responses = new Responses();
 
 
+    /**
+     * Gets all asociacion areas.
+     *
+     * @param firstResult the first result
+     * @param maxResult   the max result
+     * @return the all asociacion areas
+     */
     @GET
     public Response getAllAsociacionAreas(@QueryParam(FIRST_RESULT) Integer firstResult, @QueryParam(MAX_RESULT) Integer maxResult) {
         if (firstResult != null && firstResult < 1) {
@@ -39,6 +52,12 @@ public class AsociacionAreasResource {
         return Response.ok(asociacionAreasList).build();
     }
 
+    /**
+     * Gets asociacion areas by codigo.
+     *
+     * @param codigo the codigo
+     * @return the asociacion areas by codigo
+     */
     @GET
     @Path("/byCodigo")
     public Response getAsociacionAreasByCodigo(@QueryParam(CODIGO) Long codigo) {
@@ -55,6 +74,12 @@ public class AsociacionAreasResource {
     }
 
 
+    /**
+     * Create asociacion areas response.
+     *
+     * @param asociacionAreas the asociacion areas
+     * @return the response
+     */
     @POST
     public Response createAsociacionAreas(AsociacionAreas asociacionAreas) {
         if (asociacionAreas.getCodigo() == null) {
@@ -75,6 +100,12 @@ public class AsociacionAreasResource {
         return Response.status(Response.Status.CREATED).entity(createAsociacionAreas).build();
     }
 
+    /**
+     * Update asociacion areas response.
+     *
+     * @param asociacionAreas the asociacion areas
+     * @return the response
+     */
     @PUT
     public Response updateAsociacionAreas(AsociacionAreas asociacionAreas) {
         if (asociacionAreas.getCodigo() == null) {
@@ -93,6 +124,12 @@ public class AsociacionAreasResource {
         return Response.ok(asociacionAreasToUpdate).build();
     }
 
+    /**
+     * Delete asociacion areas response.
+     *
+     * @param codigo the codigo
+     * @return the response
+     */
     @DELETE
     public Response deleteAsociacionAreas(@QueryParam(CODIGO) Long codigo) {
         if (codigo == null) {

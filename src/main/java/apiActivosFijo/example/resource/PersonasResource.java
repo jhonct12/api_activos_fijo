@@ -13,19 +13,35 @@ import java.util.List;
 
 import static apiActivosFijo.example.Diccionario.Diccionario.*;
 
+/**
+ * The type Personas resource.
+ */
 @Consumes(MediaType.APPLICATION_JSON)
 @Produces(MediaType.APPLICATION_JSON)
 @Path("/personas")
 public class PersonasResource {
 
+    /**
+     * The Uri info.
+     */
     @Context
     UriInfo uriInfo;
 
+    /**
+     * The Personas service.
+     */
     @EJB
     PersonasService personasService;
 
     private Responses responses = new Responses();
 
+    /**
+     * Gets all personas.
+     *
+     * @param firstResult the first result
+     * @param maxResult   the max result
+     * @return the all personas
+     */
     @GET
     public Response getAllPersonas(@QueryParam(FIRST_RESULT) Integer firstResult, @QueryParam(MAX_RESULT) Integer maxResult) {
         if (firstResult != null && firstResult < 1) {
@@ -38,6 +54,12 @@ public class PersonasResource {
         return Response.ok(personasList).build();
     }
 
+    /**
+     * Gets area by documento.
+     *
+     * @param documento the documento
+     * @return the area by documento
+     */
     @GET
     @Path("/byDocument")
     public Response getAreaByDocumento(@QueryParam(DOCUMENTO) String documento) {
@@ -54,6 +76,12 @@ public class PersonasResource {
         return Response.ok(personas).build();
     }
 
+    /**
+     * Create personas response.
+     *
+     * @param personas the personas
+     * @return the response
+     */
     @POST
     public Response createPersonas(Personas personas) {
         if (personas.getDocumento().equals("")) {
@@ -69,6 +97,12 @@ public class PersonasResource {
         return Response.status(Response.Status.CREATED).entity(createPersonas).build();
     }
 
+    /**
+     * Update personas response.
+     *
+     * @param personas the personas
+     * @return the response
+     */
     @PUT
     public Response updatePersonas(Personas personas) {
         if (personas.getDocumento().equals("")) {
@@ -83,6 +117,12 @@ public class PersonasResource {
         return Response.ok(personasToUpdate).build();
     }
 
+    /**
+     * Delete personas response.
+     *
+     * @param documento the documento
+     * @return the response
+     */
     @DELETE
     public Response deletePersonas(@QueryParam(DOCUMENTO) String documento) {
         if (documento.equals("")) {

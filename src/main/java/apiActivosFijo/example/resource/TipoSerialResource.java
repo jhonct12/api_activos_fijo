@@ -15,11 +15,17 @@ import static apiActivosFijo.example.Diccionario.Diccionario.CODIGO;
 import static apiActivosFijo.example.Diccionario.Diccionario.DESCRIPCION;
 import static apiActivosFijo.example.Diccionario.Diccionario.KEY_TIPO_SERIAl;
 
+/**
+ * The type Tipo serial resource.
+ */
 @Consumes(MediaType.APPLICATION_JSON)
 @Produces(MediaType.APPLICATION_JSON)
 @Path("/tipoSerial")
 public class TipoSerialResource {
 
+    /**
+     * The Uri info.
+     */
     @Context
     UriInfo uriInfo;
 
@@ -29,6 +35,13 @@ public class TipoSerialResource {
     private Responses responses = new Responses();
 
 
+    /**
+     * Gets all tipo serial.
+     *
+     * @param firstResult the first result
+     * @param maxResult   the max result
+     * @return the all tipo serial
+     */
     @GET
     public Response getAllTipoSerial(@QueryParam("firstResult") Integer firstResult, @QueryParam("maxResult") Integer maxResult) {
         if (firstResult != null && firstResult < 1) {
@@ -42,6 +55,12 @@ public class TipoSerialResource {
     }
 
 
+    /**
+     * Gets tipo serial by code.
+     *
+     * @param codigo the codigo
+     * @return the tipo serial by code
+     */
     @GET
     @Path("/byCodigo")
     public Response getTipoSerialByCode(@QueryParam(CODIGO) String codigo) {
@@ -57,6 +76,12 @@ public class TipoSerialResource {
         return Response.ok(tipoSerial).build();
     }
 
+    /**
+     * Create tipo serial response.
+     *
+     * @param tipoSerial the tipo serial
+     * @return the response
+     */
     @POST
     public Response createTipoSerial(Tipo tipoSerial) {
         if (tipoSerial.getCodigo().equals("")) {
@@ -72,6 +97,12 @@ public class TipoSerialResource {
         return Response.status(Response.Status.CREATED).entity(createTipoSerial).build();
     }
 
+    /**
+     * Update tipo serial response.
+     *
+     * @param tipoSerial the tipo serial
+     * @return the response
+     */
     @PUT
     public Response updateTipoSerial(Tipo tipoSerial) {
         if (tipoSerial.getCodigo().equals("")) {
@@ -87,6 +118,12 @@ public class TipoSerialResource {
     }
 
 
+    /**
+     * Delete tipo serial response.
+     *
+     * @param codigo the codigo
+     * @return the response
+     */
     @DELETE
     public Response deleteTipoSerial(@QueryParam(CODIGO) String codigo) {
         if (codigo.equals("")) {

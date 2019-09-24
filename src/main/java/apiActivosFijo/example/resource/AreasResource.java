@@ -16,11 +16,17 @@ import static apiActivosFijo.example.Diccionario.Diccionario.CODIGO;
 import static apiActivosFijo.example.Diccionario.Diccionario.DESCRIPCION;
 import static apiActivosFijo.example.Diccionario.Diccionario.KEY_AREA;
 
+/**
+ * The type Areas resource.
+ */
 @Consumes(MediaType.APPLICATION_JSON)
 @Produces(MediaType.APPLICATION_JSON)
 @Path("/areas")
 public class AreasResource {
 
+    /**
+     * The Uri info.
+     */
     @Context
     UriInfo uriInfo;
 
@@ -30,6 +36,13 @@ public class AreasResource {
     private Responses responses = new Responses();
 
 
+    /**
+     * Gets all areas.
+     *
+     * @param firstResult the first result
+     * @param maxResult   the max result
+     * @return the all areas
+     */
     @GET
     public Response getAllAreas(@QueryParam("firstResult") Integer firstResult, @QueryParam("maxResult") Integer maxResult) {
         if (firstResult != null && firstResult < 1) {
@@ -42,6 +55,12 @@ public class AreasResource {
         return Response.ok(areasList).build();
     }
 
+    /**
+     * Gets area by codigo.
+     *
+     * @param codigo the codigo
+     * @return the area by codigo
+     */
     @GET
     @Path("/byCodigo")
     public Response getAreaByCodigo(@QueryParam(CODIGO) String codigo) {
@@ -58,6 +77,12 @@ public class AreasResource {
         return Response.ok(areas).build();
     }
 
+    /**
+     * Create areas response.
+     *
+     * @param areas the areas
+     * @return the response
+     */
     @POST
     public Response createAreas(Areas areas) {
         if (areas.getCodigo().equals("")) {
@@ -73,6 +98,12 @@ public class AreasResource {
         return Response.status(Response.Status.CREATED).entity(createAreas).build();
     }
 
+    /**
+     * Update areas response.
+     *
+     * @param areas the areas
+     * @return the response
+     */
     @PUT
     public Response updateAreas(Areas areas) {
         if (areas.getCodigo().equals("")) {
@@ -87,6 +118,12 @@ public class AreasResource {
         return Response.ok(areasToUpdate).build();
     }
 
+    /**
+     * Delete areas response.
+     *
+     * @param codigo the codigo
+     * @return the response
+     */
     @DELETE
     public Response deleteAreas(@QueryParam(CODIGO) String codigo) {
         if (codigo.equals("")) {

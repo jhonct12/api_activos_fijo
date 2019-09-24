@@ -10,11 +10,17 @@ import java.util.*;
 
 import static apiActivosFijo.example.Diccionario.Diccionario.*;
 
+/**
+ * The type Color resource.
+ */
 @Consumes(MediaType.APPLICATION_JSON)
 @Produces(MediaType.APPLICATION_JSON)
 @Path("/color")
 public class ColorResource {
 
+    /**
+     * The Uri info.
+     */
     @Context
     UriInfo uriInfo;
 
@@ -24,6 +30,13 @@ public class ColorResource {
     private Responses responses = new Responses();
 
 
+    /**
+     * Gets all color.
+     *
+     * @param firstResult the first result
+     * @param maxResult   the max result
+     * @return the all color
+     */
     @GET
     public Response getAllColor(@QueryParam(FIRST_RESULT) Integer firstResult, @QueryParam(MAX_RESULT) Integer maxResult) {
         if (firstResult != null && firstResult < 1) {
@@ -36,6 +49,12 @@ public class ColorResource {
         return Response.ok(colorList).build();
     }
 
+    /**
+     * Gets color by codigo.
+     *
+     * @param codigo the codigo
+     * @return the color by codigo
+     */
     @GET
     @Path("/byCodigo")
     public Response getColorByCodigo(@QueryParam(CODIGO) String codigo) {
@@ -51,6 +70,12 @@ public class ColorResource {
         return Response.ok(color).build();
     }
 
+    /**
+     * Create color response.
+     *
+     * @param color the color
+     * @return the response
+     */
     @POST
     public Response createColor(Color color) {
         if (color.getCodigo().equals("")) {
@@ -66,6 +91,12 @@ public class ColorResource {
         return Response.status(Response.Status.CREATED).entity(createColor).build();
     }
 
+    /**
+     * Update color response.
+     *
+     * @param color the color
+     * @return the response
+     */
     @PUT
     public Response updateColor(Color color) {
         if (color.getCodigo().equals("")) {
@@ -80,6 +111,12 @@ public class ColorResource {
         return Response.ok(colorToUpdate).build();
     }
 
+    /**
+     * Delete color response.
+     *
+     * @param codigo the codigo
+     * @return the response
+     */
     @DELETE
     public Response deleteColor(@QueryParam(CODIGO) String codigo) {
         if (codigo.equals("")) {
