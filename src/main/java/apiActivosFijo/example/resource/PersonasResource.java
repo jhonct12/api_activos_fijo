@@ -62,7 +62,7 @@ public class PersonasResource {
      */
     @GET
     @Path("/byDocument")
-    public Response getAreaByDocumento(@QueryParam(DOCUMENTO) String documento) {
+    public Response getPersonasByDocumento(@QueryParam(DOCUMENTO) String documento) {
         if (documento.equals("")) {
             return responses.getResponse(Response.Status.BAD_REQUEST, KEY_PERSONAS, new String[]{DOCUMENTO, DESCRIPCION}, new String[]{"", "El documento ingresado no puede estar vacio"});
         }

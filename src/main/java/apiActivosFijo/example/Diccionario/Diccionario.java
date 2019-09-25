@@ -17,9 +17,9 @@ public class Diccionario {
      */
     public static final String KEY_ESTADO_ACTUAL = "key_estado_actual";
     /**
-     * The constant KEY_TIPO_SERIAl.
+     * The constant KEY_TIPO.
      */
-    public static final String KEY_TIPO_SERIAl = "key_tipo_serial";
+    public static final String KEY_TIPO = "key_tipo";
     /**
      * The constant KEY_AREA.
      */

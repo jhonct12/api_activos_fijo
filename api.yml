@@ -1,0 +1,1385 @@
+#Test with: http://editor.swagger.io/
+swagger: '2.0'
+info:
+  version: 1.0.0
+  title: api-activos-fijo Microservice
+  description: Java Microservice + MySQL Database
+  contact:
+    name: Jhon alexander chacon torres
+    email: jhachacont@correo.udistrital.edu.co
+  license:
+    name: PruebaConocimiento
+host: localhost
+basePath: /api-activos-fijo-ms/resources
+schemes:
+- http
+consumes:
+- application/json
+produces:
+- application/json
+paths:
+  /tipo:
+    get:
+      summary: retorna todos los registros del tipo
+      operationId: getAllTipo
+      parameters:
+        - name: firstResult
+          in: query
+          description: el primer resultado a retornar
+          required: false
+          type: integer
+        - name: maxResult
+          in: query
+          description: el maximo numero de resultados a retornar
+          required: false
+          type: integer
+      responses:
+        200:
+          description: Ok
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Tipo'
+        406:
+          description: Not Acceptable (Invalid Params)
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        500:
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/ErrorModel'
+    post:
+      summary: crear nuevos tipos
+      operationId: createTipo
+      parameters:
+      - name: Tipo
+        in: body
+        required: true
+        description: Objeto Tipo a crear
+        schema:
+          $ref: '#/definitions/Tipo'
+      responses:
+        201:
+          description: Respuesta para la creacion del objeto
+          schema:
+            $ref: '#/definitions/Tipo'
+        400:
+          description: Bad Request falta un dato
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        403:
+          description: Forbidden el dato ya existe
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        500:
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/ErrorModel'
+    put:
+      summary: Actualizar un objeto de tipo
+      operationId: updateTipo
+      parameters:
+      - name: tipo
+        in: body
+        required: true
+        description: Objeto tipo a actualizar
+        schema:
+          $ref: '#/definitions/Tipo'
+      responses:
+        200:
+          description: Ok
+          schema:
+            $ref: '#/definitions/Tipo'
+        400:
+          description: Bad Request falta un dato
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        404:
+          description: Not Found no existe el dato
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        500:
+          description: unexpected error
+          schema:
+            $ref: '#/definitions/ErrorModel'
+    delete:
+      summary: Eliminar tipo segun llave o codigo
+      operationId: deleteTipo
+      parameters:
+      - name: codigo
+        in: query
+        required: true
+        description: codigo o lleve del tipo
+        type: string
+      responses:
+        200:
+          description: Ok
+          schema:
+            $ref: '#/definitions/Tipo'
+        400:
+          description: Bad Request falta un dato
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        404:
+          description: Not Found
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        500:
+          description: unexpected error
+          schema:
+            $ref: '#/definitions/ErrorModel'
+
+  /tipo/byCodigo:
+    get:
+      summary: Retorna un tipo segun su codigo
+      operationId: getTipoByCode
+      parameters:
+      - name: codigo
+        in: query
+        description: codigo del tipo
+        required: true
+        type: string
+      responses:
+        200:
+          description: Ok
+          schema:
+            $ref: '#/definitions/Tipo'
+        400:
+          description: Bad Request falta un dato
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        404:
+          description: Not Found no existe el dato
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        500:
+          description: unexpected error
+          schema:
+            $ref: '#/definitions/ErrorModel'
+
+  /color:
+    get:
+      summary: retorna todos los registros de colores registrados
+      operationId: getAllColor
+      parameters:
+      - name: firstResult
+        in: query
+        description: el primer resultado a retornar
+        required: false
+        type: integer
+      - name: maxResult
+        in: query
+        description: el maximo numero de resultados a retornar
+        required: false
+        type: integer
+      responses:
+        200:
+          description: Ok
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Color'
+        406:
+          description: Not Acceptable (Invalid Params)
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        500:
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/ErrorModel'
+    post:
+      summary: crear nuevos colores
+      operationId: createColor
+      parameters:
+      - name: Color
+        in: body
+        required: true
+        description: Objeto Color a crear
+        schema:
+          $ref: '#/definitions/Color'
+      responses:
+        201:
+          description: Respuesta para la creacion del objeto
+          schema:
+            $ref: '#/definitions/Color'
+        400:
+          description: Bad Request falta un dato
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        403:
+          description: Forbidden el dato ya existe
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        500:
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/ErrorModel'
+    put:
+      summary: Actualizar un objeto de color
+      operationId: updateColor
+      parameters:
+      - name: color
+        in: body
+        required: true
+        description: Objeto color a actualizar
+        schema:
+          $ref: '#/definitions/Color'
+      responses:
+        200:
+          description: Ok
+          schema:
+            $ref: '#/definitions/Color'
+        400:
+          description: Bad Request falta un dato
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        404:
+          description: Not Found no existe el dato
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        500:
+          description: unexpected error
+          schema:
+            $ref: '#/definitions/ErrorModel'
+    delete:
+      summary: Eliminar color segun llave o codigo
+      operationId: deleteColor
+      parameters:
+      - name: codigo
+        in: query
+        required: true
+        description: codigo o lleve del color
+        type: string
+      responses:
+        200:
+          description: Ok
+          schema:
+            $ref: '#/definitions/Color'
+        400:
+          description: Bad Request falta un dato
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        404:
+          description: Not Found
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        500:
+          description: unexpected error
+          schema:
+            $ref: '#/definitions/ErrorModel'
+
+  /color/byCodigo:
+    get:
+      summary: Retorna un color segun su codigo
+      operationId: getColorByCode
+      parameters:
+      - name: codigo
+        in: query
+        description: codigo del color
+        required: true
+        type: string
+      responses:
+        200:
+          description: Ok
+          schema:
+            $ref: '#/definitions/Color'
+        400:
+          description: Bad Request falta un dato
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        404:
+          description: Not Found no existe el dato
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        500:
+          description: unexpected error
+          schema:
+            $ref: '#/definitions/ErrorModel'
+
+  /estadoActual:
+    get:
+      summary: retorna todos los registros de estado actual registrados
+      operationId: getAllEstadoActual
+      parameters:
+      - name: firstResult
+        in: query
+        description: el primer resultado a retornar
+        required: false
+        type: integer
+      - name: maxResult
+        in: query
+        description: el maximo numero de resultados a retornar
+        required: false
+        type: integer
+      responses:
+        200:
+          description: Ok
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/EstadoActual'
+        406:
+          description: Not Acceptable (Invalid Params)
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        500:
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/ErrorModel'
+    post:
+      summary: crear nuevos estados actuales
+      operationId: createEstadoActual
+      parameters:
+      - name: estadoActual
+        in: body
+        required: true
+        description: Objeto estado actual a crear
+        schema:
+          $ref: '#/definitions/EstadoActual'
+      responses:
+        201:
+          description: Respuesta para la creacion del objeto
+          schema:
+            $ref: '#/definitions/EstadoActual'
+        400:
+          description: Bad Request falta un dato
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        403:
+          description: Forbidden el dato ya existe
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        500:
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/ErrorModel'
+    put:
+      summary: Actualizar un objeto de estado actual
+      operationId: updateEstadoActual
+      parameters:
+      - name: estadoActual
+        in: body
+        required: true
+        description: Objeto estado actual a actualizar
+        schema:
+          $ref: '#/definitions/EstadoActual'
+      responses:
+        200:
+          description: Ok
+          schema:
+            $ref: '#/definitions/EstadoActual'
+        400:
+          description: Bad Request falta un dato
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        404:
+          description: Not Found no existe el dato
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        500:
+          description: unexpected error
+          schema:
+            $ref: '#/definitions/ErrorModel'
+    delete:
+      summary: Eliminar estado actual segun llave o codigo
+      operationId: deleteEstadoActual
+      parameters:
+      - name: codigo
+        in: query
+        required: true
+        description: codigo o lleve del estado actual
+        type: string
+      responses:
+        200:
+          description: Ok
+          schema:
+            $ref: '#/definitions/EstadoActual'
+        400:
+          description: Bad Request falta un dato
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        404:
+          description: Not Found
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        500:
+          description: unexpected error
+          schema:
+            $ref: '#/definitions/ErrorModel'
+
+  /estadoActual/byCodigo:
+    get:
+      summary: Retorna un estado actual segun su codigo
+      operationId: getEstadoActualByCode
+      parameters:
+      - name: codigo
+        in: query
+        description: codigo del estado actual
+        required: true
+        type: string
+      responses:
+        200:
+          description: Ok
+          schema:
+            $ref: '#/definitions/EstadoActual'
+        400:
+          description: Bad Request falta un dato
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        404:
+          description: Not Found no existe el dato
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        500:
+          description: unexpected error
+          schema:
+            $ref: '#/definitions/ErrorModel'
+
+  /personas:
+    get:
+      summary: retorna todos los registros de personas registrados
+      operationId: getAllPersonas
+      parameters:
+      - name: firstResult
+        in: query
+        description: el primer resultado a retornar
+        required: false
+        type: integer
+      - name: maxResult
+        in: query
+        description: el maximo numero de resultados a retornar
+        required: false
+        type: integer
+      responses:
+        200:
+          description: Ok
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Personas'
+        406:
+          description: Not Acceptable (Invalid Params)
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        500:
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/ErrorModel'
+    post:
+      summary: crear nuevas personas
+      operationId: createPersonas
+      parameters:
+      - name: personas
+        in: body
+        required: true
+        description: Objeto personas a crear
+        schema:
+          $ref: '#/definitions/Personas'
+      responses:
+        201:
+          description: Respuesta para la creacion del objeto
+          schema:
+            $ref: '#/definitions/Personas'
+        400:
+          description: Bad Request falta un dato
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        403:
+          description: Forbidden el dato ya existe
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        500:
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/ErrorModel'
+    put:
+      summary: Actualizar un objeto de personas
+      operationId: updatePersonas
+      parameters:
+      - name: personas
+        in: body
+        required: true
+        description: Objeto personas a actualizar
+        schema:
+          $ref: '#/definitions/Personas'
+      responses:
+        200:
+          description: Ok
+          schema:
+            $ref: '#/definitions/Personas'
+        400:
+          description: Bad Request falta un dato
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        404:
+          description: Not Found no existe el dato
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        500:
+          description: unexpected error
+          schema:
+            $ref: '#/definitions/ErrorModel'
+    delete:
+      summary: Eliminar personas segun llave o documento
+      operationId: deletePersonas
+      parameters:
+      - name: documento
+        in: query
+        required: true
+        description: documento o lleve del estado actual
+        type: string
+      responses:
+        200:
+          description: Ok
+          schema:
+            $ref: '#/definitions/Personas'
+        400:
+          description: Bad Request falta un dato
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        404:
+          description: Not Found
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        500:
+          description: unexpected error
+          schema:
+            $ref: '#/definitions/ErrorModel'
+
+  /personas/byDocument:
+    get:
+      summary: Retorna una persona segun su documento
+      operationId: getPersonasByDocumento
+      parameters:
+      - name: documento
+        in: query
+        description: documento de la persona
+        required: true
+        type: string
+      responses:
+        200:
+          description: Ok
+          schema:
+            $ref: '#/definitions/Personas'
+        400:
+          description: Bad Request falta un dato
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        404:
+          description: Not Found no existe el dato
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        500:
+          description: unexpected error
+          schema:
+            $ref: '#/definitions/ErrorModel'
+
+  /areas:
+    get:
+      summary: retorna todos los registros de areas
+      operationId: getAllAreas
+      parameters:
+      - name: firstResult
+        in: query
+        description: el primer resultado a retornar
+        required: false
+        type: integer
+      - name: maxResult
+        in: query
+        description: el maximo numero de resultados a retornar
+        required: false
+        type: integer
+      responses:
+        200:
+          description: Ok
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Areas'
+        406:
+          description: Not Acceptable (Invalid Params)
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        500:
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/ErrorModel'
+    post:
+      summary: crear nuevas areas
+      operationId: createAreas
+      parameters:
+      - name: areas
+        in: body
+        required: true
+        description: Objeto Areas a crear
+        schema:
+          $ref: '#/definitions/Areas'
+      responses:
+        201:
+          description: Respuesta para la creacion del objeto
+          schema:
+            $ref: '#/definitions/Areas'
+        400:
+          description: Bad Request falta un dato
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        403:
+          description: Forbidden el dato ya existe
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        500:
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/ErrorModel'
+    put:
+      summary: Actualizar un objeto de areas
+      operationId: updateAreas
+      parameters:
+      - name: areas
+        in: body
+        required: true
+        description: Objeto areas a actualizar
+        schema:
+          $ref: '#/definitions/Areas'
+      responses:
+        200:
+          description: Ok
+          schema:
+            $ref: '#/definitions/Areas'
+        400:
+          description: Bad Request falta un dato
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        404:
+          description: Not Found no existe el dato
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        500:
+          description: unexpected error
+          schema:
+            $ref: '#/definitions/ErrorModel'
+    delete:
+      summary: Eliminar areas segun llave o codigo
+      operationId: deleteAreas
+      parameters:
+      - name: codigo
+        in: query
+        required: true
+        description: codigo o lleve del area
+        type: string
+      responses:
+        200:
+          description: Ok
+          schema:
+            $ref: '#/definitions/Areas'
+        400:
+          description: Bad Request falta un dato
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        404:
+          description: Not Found
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        500:
+          description: unexpected error
+          schema:
+            $ref: '#/definitions/ErrorModel'
+
+  /areas/byCodigo:
+    get:
+      summary: Retorna un area segun su codigo
+      operationId: getAreaByCode
+      parameters:
+      - name: codigo
+        in: query
+        description: codigo del area
+        required: true
+        type: string
+      responses:
+        200:
+          description: Ok
+          schema:
+            $ref: '#/definitions/Areas'
+        400:
+          description: Bad Request falta un dato
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        404:
+          description: Not Found no existe el dato
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        500:
+          description: unexpected error
+          schema:
+            $ref: '#/definitions/ErrorModel'
+
+  /activos:
+    get:
+      summary: retorna todos los registros de los activos
+      operationId: getAllActivos
+      parameters:
+      - name: firstResult
+        in: query
+        description: el primer resultado a retornar
+        required: false
+        type: integer
+      - name: maxResult
+        in: query
+        description: el maximo numero de resultados a retornar
+        required: false
+        type: integer
+      responses:
+        200:
+          description: Ok
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Activos'
+        406:
+          description: Not Acceptable (Invalid Params)
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        500:
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/ErrorModel'
+    post:
+      summary: crear nuevos activos
+      operationId: createActivos
+      parameters:
+      - name: activos
+        in: body
+        required: true
+        description: Objeto Activos a crear
+        schema:
+          $ref: '#/definitions/Activos'
+      responses:
+        201:
+          description: Respuesta para la creacion del objeto
+          schema:
+            $ref: '#/definitions/Activos'
+        400:
+          description: Bad Request falta un dato
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        403:
+          description: Forbidden el dato ya existe
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        406:
+          description: Not Acceptable (Invalid Params)
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        500:
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/ErrorModel'
+    put:
+      summary: Actualizar un objeto de activos
+      operationId: updateActivos
+      parameters:
+      - name: activos
+        in: body
+        required: true
+        description: Objeto activos a actualizar
+        schema:
+          $ref: '#/definitions/Activos'
+      responses:
+        200:
+          description: Ok
+          schema:
+            $ref: '#/definitions/Activos'
+        400:
+          description: Bad Request falta un dato
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        404:
+          description: Not Found no existe el dato
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        406:
+          description: Not Acceptable (Invalid Params)
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        500:
+          description: unexpected error
+          schema:
+            $ref: '#/definitions/ErrorModel'
+    delete:
+      summary: Eliminar activos segun llave o codigo
+      operationId: deleteActivos
+      parameters:
+      - name: codigo
+        in: query
+        required: true
+        description: codigo o lleve del activo
+        type: string
+      responses:
+        200:
+          description: Ok
+          schema:
+            $ref: '#/definitions/Activos'
+        400:
+          description: Bad Request falta un dato
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        404:
+          description: Not Found
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        500:
+          description: unexpected error
+          schema:
+            $ref: '#/definitions/ErrorModel'
+
+  /activos/byCodigo:
+    get:
+      summary: Retorna un activo segun su codigo
+      operationId: getActivosByCode
+      parameters:
+      - name: codigo
+        in: query
+        description: codigo del activo
+        required: true
+        type: string
+      responses:
+        200:
+          description: Ok
+          schema:
+            $ref: '#/definitions/Tipo'
+        400:
+          description: Bad Request falta un dato
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        404:
+          description: Not Found no existe el dato
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        500:
+          description: unexpected error
+          schema:
+            $ref: '#/definitions/ErrorModel'
+
+  /activos/byCodeTipo:
+    get:
+      summary: Retorna un activo segun el codigo del tipo
+      operationId: getActivosByTipo
+      parameters:
+      - name: codeTipo
+        in: query
+        description: codigo del tipo para el activo
+        required: true
+        type: string
+      responses:
+        200:
+          description: Ok
+          schema:
+            $ref: '#/definitions/Activos'
+        400:
+          description: Bad Request falta un dato
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        404:
+          description: Not Found no existe el dato
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        500:
+          description: unexpected error
+          schema:
+            $ref: '#/definitions/ErrorModel'
+
+  /activos/byFechaCompra:
+    get:
+      summary: Retorna un activo segun la fecha de compra del activo
+      operationId: getActivosByFechaCompra
+      parameters:
+      - name: fechaCompra
+        in: query
+        description: fecha compra del activo
+        required: true
+        type: number
+      responses:
+        200:
+          description: Ok
+          schema:
+            $ref: '#/definitions/Activos'
+        400:
+          description: Bad Request falta un dato
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        404:
+          description: Not Found no existe el dato
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        500:
+          description: unexpected error
+          schema:
+            $ref: '#/definitions/ErrorModel'
+
+  /activos/bySerial:
+    get:
+      summary: Retorna un activo segun el serial del activo
+      operationId: getActivosBySerial
+      parameters:
+      - name: serial
+        in: query
+        description: serial del activo
+        required: true
+        type: string
+      responses:
+        200:
+          description: Ok
+          schema:
+            $ref: '#/definitions/Activos'
+        400:
+          description: Bad Request falta un dato
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        404:
+          description: Not Found no existe el dato
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        500:
+          description: unexpected error
+          schema:
+            $ref: '#/definitions/ErrorModel'
+
+  /asociacionAreas:
+    get:
+      summary: retorna todos los registros de la asociacion de areas
+      operationId: getAllAsociacionAreas
+      parameters:
+      - name: firstResult
+        in: query
+        description: el primer resultado a retornar
+        required: false
+        type: integer
+      - name: maxResult
+        in: query
+        description: el maximo numero de resultados a retornar
+        required: false
+        type: integer
+      responses:
+        200:
+          description: Ok
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/AsociacionAreas'
+        406:
+          description: Not Acceptable (Invalid Params)
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        500:
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/ErrorModel'
+    post:
+      summary: crear nuevas asociaciones de areas
+      operationId: createAsociacionAreas
+      parameters:
+      - name: asociacionAreas
+        in: body
+        required: true
+        description: Objeto AsociacionAreas a crear
+        schema:
+          $ref: '#/definitions/AsociacionAreas'
+      responses:
+        201:
+          description: Respuesta para la creacion del objeto
+          schema:
+            $ref: '#/definitions/AsociacionAreas'
+        400:
+          description: Bad Request falta un dato
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        403:
+          description: Forbidden el dato ya existe
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        406:
+          description: Not Acceptable (Invalid Params)
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        500:
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/ErrorModel'
+    put:
+      summary: Actualizar un objeto de asociacion areas
+      operationId: updateAsociacionAreas
+      parameters:
+      - name: asociacionAreas
+        in: body
+        required: true
+        description: Objeto asociacionAreas a actualizar
+        schema:
+          $ref: '#/definitions/AsociacionAreas'
+      responses:
+        200:
+          description: Ok
+          schema:
+            $ref: '#/definitions/AsociacionAreas'
+        400:
+          description: Bad Request falta un dato
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        404:
+          description: Not Found no existe el dato
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        406:
+          description: Not Acceptable (Invalid Params)
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        500:
+          description: unexpected error
+          schema:
+            $ref: '#/definitions/ErrorModel'
+    delete:
+      summary: Eliminar asociacion areas segun llave o codigo
+      operationId: deleteAsociacionAreas
+      parameters:
+      - name: codigo
+        in: query
+        required: true
+        description: codigo o lleve de la asociacion del area
+        type: number
+      responses:
+        200:
+          description: Ok
+          schema:
+            $ref: '#/definitions/AsociacionAreas'
+        400:
+          description: Bad Request falta un dato
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        404:
+          description: Not Found
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        500:
+          description: unexpected error
+          schema:
+            $ref: '#/definitions/ErrorModel'
+
+  /asociacionAreas/byCodigo:
+    get:
+      summary: Retorna una asociacion de area segun su codigo
+      operationId: getAsociacionAreaByCode
+      parameters:
+      - name: codigo
+        in: query
+        description: codigo de la asociacion de area
+        required: true
+        type: number
+      responses:
+        200:
+          description: Ok
+          schema:
+            $ref: '#/definitions/AsociacionAreas'
+        400:
+          description: Bad Request falta un dato
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        404:
+          description: Not Found no existe el dato
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        500:
+          description: unexpected error
+          schema:
+            $ref: '#/definitions/ErrorModel'
+
+  /asociacionPersonas:
+    get:
+      summary: retorna todos los registros de la asociacion de personas
+      operationId: getAllAsociacionPersonas
+      parameters:
+      - name: firstResult
+        in: query
+        description: el primer resultado a retornar
+        required: false
+        type: integer
+      - name: maxResult
+        in: query
+        description: el maximo numero de resultados a retornar
+        required: false
+        type: integer
+      responses:
+        200:
+          description: Ok
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/AsociacionPersonas'
+        406:
+          description: Not Acceptable (Invalid Params)
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        500:
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/ErrorModel'
+    post:
+      summary: crear nuevas asociaciones de personas
+      operationId: createAsociacionPersonas
+      parameters:
+      - name: asociacionPersonas
+        in: body
+        required: true
+        description: Objeto AsociacionPersonas a crear
+        schema:
+          $ref: '#/definitions/AsociacionPersonas'
+      responses:
+        201:
+          description: Respuesta para la creacion del objeto
+          schema:
+            $ref: '#/definitions/AsociacionPersonas'
+        400:
+          description: Bad Request falta un dato
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        403:
+          description: Forbidden el dato ya existe
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        406:
+          description: Not Acceptable (Invalid Params)
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        500:
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/ErrorModel'
+    put:
+      summary: Actualizar un objeto de asociacion personas
+      operationId: updateAsociacionPersonas
+      parameters:
+      - name: asociacionPersonas
+        in: body
+        required: true
+        description: Objeto asociacionPersonas a actualizar
+        schema:
+          $ref: '#/definitions/AsociacionPersonas'
+      responses:
+        200:
+          description: Ok
+          schema:
+            $ref: '#/definitions/AsociacionPersonas'
+        400:
+          description: Bad Request falta un dato
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        404:
+          description: Not Found no existe el dato
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        406:
+          description: Not Acceptable (Invalid Params)
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        500:
+          description: unexpected error
+          schema:
+            $ref: '#/definitions/ErrorModel'
+    delete:
+      summary: Eliminar asociacion personas segun llave o codigo
+      operationId: deleteAsociacionPersonas
+      parameters:
+      - name: codigo
+        in: query
+        required: true
+        description: codigo o lleve de la asociacion de la persona
+        type: number
+      responses:
+        200:
+          description: Ok
+          schema:
+            $ref: '#/definitions/AsociacionPersonas'
+        400:
+          description: Bad Request falta un dato
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        404:
+          description: Not Found
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        500:
+          description: unexpected error
+          schema:
+            $ref: '#/definitions/ErrorModel'
+
+  /asociacionPersonas/byCodigo:
+    get:
+      summary: Retorna una asociacion de persona segun su codigo
+      operationId: getAsociacionPersonasByCode
+      parameters:
+      - name: codigo
+        in: query
+        description: codigo de la asociacion de persona
+        required: true
+        type: number
+      responses:
+        200:
+          description: Ok
+          schema:
+            $ref: '#/definitions/AsociacionPersonas'
+        400:
+          description: Bad Request falta un dato
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        404:
+          description: Not Found no existe el dato
+          schema:
+            $ref: '#/definitions/ErrorModel'
+        500:
+          description: unexpected error
+          schema:
+            $ref: '#/definitions/ErrorModel'
+
+definitions:
+  Tipo:
+    type: object
+    required: ["codigo", "descripcion"]
+    properties:
+      codigo:
+        type: string
+      descripcion:
+        type: string
+
+  Color:
+    type: object
+    required: ["codigo", "descripcion"]
+    properties:
+      codigo:
+        type: string
+      descripcion:
+        type: string
+
+  EstadoActual:
+    type: object
+    required: ["codigo", "descripcion"]
+    properties:
+      codigo:
+        type: string
+      descripcion:
+        type: string
+
+  Personas:
+    type: object
+    required: ["documento", "nombres", "apellidos", "telefono", "correo", "direccion"]
+    properties:
+      documento:
+        type: string
+      nombres:
+        type: string
+      apellidos:
+        type: string
+      telefono:
+        type: string
+      correo:
+        type: string
+      direccion:
+        type: string
+
+  Areas:
+    type: object
+    required: ["documento", "nombre", "ciudad", "descripcion"]
+    properties:
+      documento:
+        type: string
+      nombre:
+        type: string
+      ciudad:
+        type: string
+      descripcion:
+        type: string
+
+  Activos:
+    type: object
+    required: ["codigo", "nombre", "descripcion", "tipo", "numeroInternoInventario", "peso", "alto", "largo", "serial", "valorCompra", "fechaCompra", "fechaBaja", "estadoActual", "color"]
+    properties:
+      codigo:
+        type: string
+      nombre:
+        type: string
+      descripcion:
+        type: string
+      tipo:
+          $ref: '#/definitions/Tipo'
+      numeroInternoInventario:
+        type: string
+      peso:
+        type: number
+      alto:
+        type: number
+      largo:
+        type: number
+      serial:
+        type: string
+      valorCompra:
+        type: number
+      fechaCompra:
+        type: number
+      fechaBaja:
+        type: number
+      estadoActual:
+        $ref: '#/definitions/EstadoActual'
+      color:
+        $ref: '#/definitions/Color'
+
+  AsociacionAreas:
+    type: object
+    required: ["codigo", "areas", "activos", "fechaAsignacion", "fechaRetiro", "descripcion"]
+    properties:
+      codigo:
+        type: number
+      areas:
+        $ref: '#/definitions/Areas'
+      activos:
+        $ref: '#/definitions/Activos'
+      fechaAsignacion:
+        type: number
+      fechaRetiro:
+        type: number
+      descripcion:
+        type: string
+
+  AsociacionPersonas:
+    type: object
+    required: ["codigo", "personas", "activos", "fechaAsignacion", "fechaRetiro", "descripcion"]
+    properties:
+      codigo:
+        type: number
+      personas:
+        $ref: '#/definitions/Personas'
+      activos:
+        $ref: '#/definitions/Activos'
+      fechaAsignacion:
+        type: number
+      fechaRetiro:
+        type: number
+      descripcion:
+        type: string
+
+
+  # Errors
+  ErrorModel:
+    type: object
+    required:
+    - code
+    - description
+    - id
+    properties:
+      code:
+        type: integer
+      description:
+        type: object
+        properties:
+          key:
+            type: string
+          value:
+            type: string
+      id:
+        type: string

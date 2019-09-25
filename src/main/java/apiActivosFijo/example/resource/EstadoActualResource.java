@@ -98,13 +98,13 @@ public class EstadoActualResource {
 
 
     /**
-     * Update color response.
+     * Update estadoActual response.
      *
      * @param estadoActual the estado actual
      * @return the response
      */
     @PUT
-    public Response updateColor(EstadoActual estadoActual) {
+    public Response updateEstadoActual(EstadoActual estadoActual) {
         if (estadoActual.getCodigo().equals("")) {
             return responses.getResponse(Response.Status.BAD_REQUEST, KEY_ESTADO_ACTUAL, new String[]{CODIGO, DESCRIPCION}, new String[]{"", "El codigo ingresado no puede estar vacio"});
         }

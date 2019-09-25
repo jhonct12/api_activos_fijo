@@ -1,7 +1,7 @@
 package apiActivosFijo.example.resource;
 
 import apiActivosFijo.example.model.Areas;
-import apiActivosFijo.example.model.Color;
+
 import apiActivosFijo.example.service.AreasService;
 
 import javax.ejb.EJB;

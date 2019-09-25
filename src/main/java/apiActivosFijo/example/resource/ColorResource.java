@@ -40,10 +40,10 @@ public class ColorResource {
     @GET
     public Response getAllColor(@QueryParam(FIRST_RESULT) Integer firstResult, @QueryParam(MAX_RESULT) Integer maxResult) {
         if (firstResult != null && firstResult < 1) {
-            return responses.getResponse(Response.Status.BAD_REQUEST, FIRST_RESULT, new String[]{FIRST_RESULT, DESCRIPCION}, new String[]{firstResult.toString(), "El primer resultado no puede ser menor a 1"});
+            return responses.getResponse(Response.Status.NOT_ACCEPTABLE, FIRST_RESULT, new String[]{FIRST_RESULT, DESCRIPCION}, new String[]{firstResult.toString(), "El primer resultado no puede ser menor a 1"});
         }
         if (maxResult != null && maxResult < 1) {
-            return responses.getResponse(Response.Status.BAD_REQUEST, MAX_RESULT, new String[]{MAX_RESULT, DESCRIPCION}, new String[]{maxResult.toString(), "El maximo resultado no puede ser menor a 1"});
+            return responses.getResponse(Response.Status.NOT_ACCEPTABLE, MAX_RESULT, new String[]{MAX_RESULT, DESCRIPCION}, new String[]{maxResult.toString(), "El maximo resultado no puede ser menor a 1"});
         }
         List<Color> colorList = colorService.getAllColor(firstResult, maxResult);
         return Response.ok(colorList).build();

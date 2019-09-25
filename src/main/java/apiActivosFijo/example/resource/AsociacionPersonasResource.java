@@ -1,7 +1,6 @@
 package apiActivosFijo.example.resource;
 
 
-import apiActivosFijo.example.model.AsociacionAreas;
 import apiActivosFijo.example.model.AsociacionPersonas;
 import apiActivosFijo.example.service.AsociacionPersonasService;
 
@@ -55,14 +54,14 @@ public class AsociacionPersonasResource {
 
 
     /**
-     * Gets asociacion areas by codigo.
+     * Gets asociacion personas by codigo.
      *
      * @param codigo the codigo
-     * @return the asociacion areas by codigo
+     * @return the asociacion personas by codigo
      */
     @GET
     @Path("/byCodigo")
-    public Response getAsociacionAreasByCodigo(@QueryParam(CODIGO) Long codigo) {
+    public Response getAsociacionPersonasByCodigo(@QueryParam(CODIGO) Long codigo) {
         if (codigo == null) {
             return responses.getResponse(Response.Status.BAD_REQUEST, KEY_ASOCIACION_PERSONAS, new String[]{CODIGO, DESCRIPCION}, new String[]{"", "El codigo ingresado no puede estar vacio"});
         }
